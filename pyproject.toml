@@ -8,6 +8,7 @@ packages = [{include = "gato_toolkit"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+fastapi = "^0.95.1"
 
 
 [build-system]
