@@ -30,3 +30,20 @@ class ParametersGenerator:
             category=self._get_random_parameter("categories"),
             domain=self._get_random_parameter("domains"),
         )
+
+
+class PromptGenerator:
+    _base_dir = pathlib.Path(__file__).parent
+    _default_path = pathlib.Path(".config/scenario-system-messages.txt")
+
+    def __init__(self, parameters: entity.ScenarioParameters,
+                 path: pathlib.Path = _base_dir / _default_path):
+        self._parameters = parameters
+        self._system_message = random.choice(read_list(path))
+
+    def generate(self) -> entity.ScenarioPrompt:
+        instance = entity.ScenarioPrompt(
+            system_message=self._system_message,
+            parameters=self._parameters,
+        )
+        return instance
