@@ -43,11 +43,10 @@ class PromptGenerator:
         self._system_message = random.choice(read_list(path))
 
     def generate(self) -> entity.ScenarioPrompt:
-        instance = entity.ScenarioPrompt(
+        return entity.ScenarioPrompt(
             system_message=self._system_message,
             parameters=self._parameters,
         )
-        return instance
 
 
 class Generator:
@@ -64,6 +63,4 @@ class Generator:
         prompt.add_system_message(system_message)
         prompt.add_user_message(user_message)
         description = self._model.submit(prompt)
-        return entity.Scenario(
-            description=description,
-        )
+        return entity.Scenario(description=description)
