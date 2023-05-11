@@ -10,7 +10,7 @@ def read_list(path):
         return infile.read().strip().split('\n')
 
 
-class ParametersGenerator:
+class ScenarioParametersGenerator:
     _base_dir = pathlib.Path(__file__).parent
     _default_path = pathlib.Path(".config/scenario-params")
 
@@ -33,7 +33,7 @@ class ParametersGenerator:
         )
 
 
-class PromptGenerator:
+class ScenarioPromptGenerator:
     _base_dir = pathlib.Path(__file__).parent
     _default_path = pathlib.Path(".config/scenario-system-messages.txt")
 
@@ -49,7 +49,7 @@ class PromptGenerator:
         )
 
 
-class Generator:
+class ScenarioGenerator:
     def __init__(self, model: llm.LLM, prompt: entity.ScenarioPrompt):
         self._model = model
         self._prompt = prompt
