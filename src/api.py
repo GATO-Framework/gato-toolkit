@@ -3,7 +3,7 @@ from typing import List
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-import entity
+from gato import entity
 
 app = FastAPI()
 
