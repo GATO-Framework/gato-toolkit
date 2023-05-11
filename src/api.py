@@ -10,11 +10,6 @@ import gato.service
 app = FastAPI()
 
 
-class ScenarioRequest(BaseModel):
-    parameters: gato.entity.ScenarioParameters
-    prompt: gato.entity.ScenarioPrompt
-
-
 class ScenarioResponse(BaseModel):
     scenario: gato.entity.Scenario
 
@@ -57,8 +52,8 @@ class DecomposeResponse(BaseModel):
 
 
 @app.post("/scenario")
-async def create_scenario(request: ScenarioRequest) -> ScenarioResponse:
-    model = gato.llm.LLM("")
+async def create_scenario(api_key: str) -> ScenarioResponse:
+    model = gato.llm.LLM(api_key)
     gato_service = gato.service.GatoService(model)
     scenario = gato_service.create_scenario()
     return ScenarioResponse(scenario=scenario)
