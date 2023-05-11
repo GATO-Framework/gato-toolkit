@@ -56,11 +56,6 @@ class DecomposeResponse(BaseModel):
     tasks: List[str]
 
 
-@app.get("/scenario/{scenario_id}")
-async def get_scenario(scenario_id) -> ScenarioResponse:
-    pass
-
-
 @app.post("/scenario")
 async def create_scenario(request: ScenarioRequest) -> ScenarioResponse:
     model = gato.llm.LLM("")
