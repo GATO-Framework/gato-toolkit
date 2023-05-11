@@ -17,7 +17,6 @@ class ScenarioPrompt(BaseModel):
 
 
 class Scenario(BaseModel):
-    prompt: ScenarioPrompt
     description: str
     id: uuid.UUID = Field(default_factory=uuid.uuid4)
 
@@ -28,6 +27,5 @@ class ActionPrompt(BaseModel):
 
 
 class Action(BaseModel):
-    prompt: ActionPrompt
     description: str
     id: uuid.UUID = Field(default_factory=uuid.uuid4)
