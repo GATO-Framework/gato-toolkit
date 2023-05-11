@@ -2,6 +2,7 @@ import pathlib
 import random
 
 import entity
+import llm
 
 
 def read_list(path):
@@ -47,3 +48,22 @@ class PromptGenerator:
             parameters=self._parameters,
         )
         return instance
+
+
+class Generator:
+    def __init__(self, model: llm.LLM, prompt: entity.ScenarioPrompt):
+        self._model = model
+        self._prompt = prompt
+
+    def generate(self) -> entity.Scenario:
+        system_message = self._prompt.system_message
+        parameters = self._prompt.parameters.dict().items()
+        user_message = "\n".join([f"{name}: {param}" for name, param in parameters])
+
+        prompt = llm.ChatPrompt()
+        prompt.add_system_message(system_message)
+        prompt.add_user_message(user_message)
+        description = self._model.submit(prompt)
+        return entity.Scenario(
+            description=description,
+        )
