@@ -66,7 +66,7 @@ async def create_action(
 ) -> ActionResponse:
     model = gato.llm.LLM(api_key)
     gato_service = gato.service.GatoService(model)
-    action = gato_service.create_action()
+    action = gato_service.create_action(request.scenario)
     return ActionResponse(action=action)
 
 

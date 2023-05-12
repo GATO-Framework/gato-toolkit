@@ -16,5 +16,8 @@ class GatoService:
         scenario_generator = generator.ScenarioGenerator(self._model, prompt)
         return scenario_generator.generate()
 
-    def create_action(self):
-        pass
+    def create_action(self, scenario: entity.Scenario) -> entity.Action:
+        prompt_generator = generator.ActionPromptGenerator(scenario)
+        prompt = prompt_generator.generate()
+        action_generator = generator.ActionGenerator(self._model, prompt)
+        return action_generator.generate()

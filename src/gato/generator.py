@@ -5,9 +5,13 @@ import entity
 import llm
 
 
+def read_file(path):
+    with open(path, encoding="utf-8", errors="ignore") as file:
+        return file.read()
+
+
 def read_list(path):
-    with open(path, encoding='utf-8', errors='ignore') as infile:
-        return infile.read().strip().split('\n')
+    return read_file(path).strip().split('\n')
 
 
 class ScenarioParametersGenerator:
@@ -50,6 +54,7 @@ class ScenarioPromptGenerator:
 
 
 class ScenarioGenerator:
+
     def __init__(self, model: llm.LLM, prompt: entity.ScenarioPrompt):
         self._model = model
         self._prompt = prompt
@@ -64,3 +69,36 @@ class ScenarioGenerator:
         prompt.add_user_message(user_message)
         description = self._model.submit(prompt)
         return entity.Scenario(description=description)
+
+
+class ActionPromptGenerator:
+    _base_dir = pathlib.Path(__file__).parent
+    _default_path = pathlib.Path(".config/scenario-params")
+
+    def __init__(self, scenario: entity.Scenario, path: pathlib.Path = _default_path):
+        self._path = path
+        self._scenario = scenario
+
+    def generate(self) -> entity.ActionPrompt:
+        system_message = read_file(self._path)
+        return entity.ActionPrompt(
+            system_message=system_message,
+            scenario=self._scenario,
+        )
+
+
+class ActionGenerator:
+
+    def __init__(self, model: llm.LLM, prompt: entity.ActionPrompt):
+        self._model = model
+        self._prompt = prompt
+
+    def generate(self) -> entity.Action:
+        system_message = self._prompt.system_message
+        scenario_description = self._prompt.scenario.description
+
+        prompt = llm.ChatPrompt()
+        prompt.add_system_message(system_message)
+        prompt.add_user_message(scenario_description)
+        description = self._model.submit(prompt)
+        return entity.Action(description=description)
