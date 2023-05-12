@@ -1,0 +1,5 @@
+# Python build and distribution directories
+build/
+dist/
+*.egg-info/
+
