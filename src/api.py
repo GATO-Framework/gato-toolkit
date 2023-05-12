@@ -1,6 +1,6 @@
-from typing import List
+from typing import List, Annotated
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Header
 from pydantic import BaseModel
 
 import gato.entity
@@ -52,7 +52,7 @@ class DecomposeResponse(BaseModel):
 
 
 @app.post("/scenario")
-async def create_scenario(api_key: str) -> ScenarioResponse:
+async def create_scenario(api_key: Annotated[str, Header()]) -> ScenarioResponse:
     model = gato.llm.LLM(api_key)
     gato_service = gato.service.GatoService(model)
     scenario = gato_service.create_scenario()
