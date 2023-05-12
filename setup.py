@@ -1,5 +1,11 @@
 from setuptools import setup, find_packages
 
+
+def get_long_description():
+    with open('README.md') as file:
+        return file.read()
+
+
 setup(
     name="gato-toolkit",
     version="0.1.0-rc1",
@@ -9,6 +15,8 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     license='MIT',
+    long_description=get_long_description(),
+    long_description_content_type='text/markdown',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'License :: OSI Approved :: MIT License',
