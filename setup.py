@@ -8,7 +8,7 @@ def get_long_description():
 
 setup(
     name="gato-toolkit",
-    version="0.1.0-rc2",
+    version="0.1.0-rc3",
     description="A toolkit for furthering research on AI alignment.",
     url="https://github.com/FyZyX/gato-toolkit",
     author="Lucas Lofaro <lucasmlofaro@gmail.com>",
