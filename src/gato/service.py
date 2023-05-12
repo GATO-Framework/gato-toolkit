@@ -1,7 +1,4 @@
-import entity
-import generator
-import llm
-import prompt
+from . import entity, generator, llm, prompt
 
 
 class GatoService:

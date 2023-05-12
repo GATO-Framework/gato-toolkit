@@ -1,7 +1,7 @@
 import pathlib
 import random
 
-import entity
+from . import entity
 
 
 def read_file(path):

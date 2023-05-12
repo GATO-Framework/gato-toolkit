@@ -1,5 +1,4 @@
-import entity
-import llm
+from . import entity, llm
 
 
 class ScenarioGenerator:
