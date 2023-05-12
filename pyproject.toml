@@ -10,6 +10,7 @@ packages = [{include = "gato_toolkit"}]
 python = "^3.10"
 fastapi = "^0.95.1"
 openai = "^0.27.6"
+streamlit = "^1.22.0"
 
 
 [build-system]
