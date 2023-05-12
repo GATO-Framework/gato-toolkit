@@ -56,9 +56,9 @@ class ScenarioPromptFactory:
 
 class ActionPromptFactory:
     _base_dir = pathlib.Path(__file__).parent
-    _default_path = pathlib.Path(".config/scenario-params")
+    _default_path = pathlib.Path(".config/action-system-message.txt")
 
-    def __init__(self, path: pathlib.Path = _default_path):
+    def __init__(self, path: pathlib.Path = _base_dir / _default_path):
         self._path = path
 
     def new(self, scenario: entity.Scenario) -> entity.ActionPrompt:
