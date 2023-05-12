@@ -1,5 +1,32 @@
 # Package Distribution
 
+## Releasing a new version
+1. Bump the version number `setup.py` appropriately
+2. Commit the version bump
+3. Tag a new version in `git`
+4. Run the [release script](#understanding-the-release-script)
+
+### Test Release
+```shell
+./release-test.sh
+```
+
+### Production Release
+```shell
+./release.sh
+```
+
+### Understanding the release script
+Here's how this script works:
+
+1. It first removes any previously built distributions in the `dist` directory.
+2. It then runs `python setup.py sdist bdist_wheel` to build new source and binary distributions of your package.
+3. It uploads these distributions to PyPI using `twine upload dist/*`.
+4. It then cleans up by removing the `build`, `dist` directories and `.egg-info` directory.
+5. Finally, it prints a message saying "Release completed successfully."
+
+> Note this script assumes that you have `twine` installed and your PyPI credentials [set up correctly](#configure-credentials).
+
 ## Configure Credentials
 
 ### Create a Test PyPI account
@@ -40,15 +67,3 @@ password = pypi-AgEIcHlwaS5vcmcCJDxyz789...  # Test PyPI token
 > This file should **NOT** be checked into source control! It contains sensitive information that could be used to upload packages to PyPI under your name.
 
 The username `__token__` and the password starting with `pypi-` indicate that we are using an API token for authentication, which is more secure than using your PyPI username and password.
-
-## Publish to Test Package Repository
-```shell
-python setup.py sdist bdist_wheel
-twine upload --repository testpypi dist/*
-```
-
-## Publish to Production Package Repository
-```shell
-python setup.py sdist bdist_wheel
-twine upload dist/*
-```
