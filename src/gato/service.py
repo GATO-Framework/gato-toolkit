@@ -15,3 +15,6 @@ class GatoService:
         prompt = prompt_generator.generate()
         scenario_generator = generator.ScenarioGenerator(self._model, prompt)
         return scenario_generator.generate()
+
+    def create_action(self):
+        pass

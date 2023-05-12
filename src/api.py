@@ -60,8 +60,14 @@ async def create_scenario(api_key: Annotated[str, Header()]) -> ScenarioResponse
 
 
 @app.post("/action")
-async def action(request: ActionRequest) -> ActionResponse:
-    pass
+async def create_action(
+        request: ActionRequest,
+        api_key: Annotated[str, Header()],
+) -> ActionResponse:
+    model = gato.llm.LLM(api_key)
+    gato_service = gato.service.GatoService(model)
+    action = gato_service.create_action()
+    return ActionResponse(action=action)
 
 
 @app.post("/discern")
