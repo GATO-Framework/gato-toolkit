@@ -25,8 +25,6 @@ setup(
         'Programming Language :: Python :: 3.10',
     ],
     install_requires=[
-        "fastapi>=0.95.1",
         "openai>=0.27.6",
-        "streamlit>=1.22.0",
     ],
 )
