@@ -25,19 +25,24 @@ class LLM:
         openai.api_key = api_key
         self._model_name = model_name
 
-    def _query(self, prompt: ChatPrompt, **kwargs) -> str:
-        response = openai.ChatCompletion.create(
+    async def _query(self, prompt: ChatPrompt, **kwargs) -> str:
+        response = await openai.ChatCompletion.acreate(
             model=self._model_name,
             messages=prompt.messages(),
             **kwargs,
         )
         return response.choices[0]["message"]["content"]
 
-    def submit(self, prompt: ChatPrompt, temperature: float = 0.7,
-               max_retries: int = 3, **kwargs) -> str:
+    async def submit(
+            self,
+            prompt: ChatPrompt,
+            temperature: float = 0.7,
+            max_retries: int = 3,
+            **kwargs,
+    ) -> str:
         for retry in range(max_retries):
             try:
-                return self._query(prompt, temperature=temperature, **kwargs)
+                return await self._query(prompt, temperature=temperature, **kwargs)
             except Exception as err:
                 wait = 2 ** retry * 5
                 print(f'Error communicating with OpenAI: "{err}"'
