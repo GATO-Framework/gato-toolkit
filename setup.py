@@ -26,5 +26,6 @@ setup(
     ],
     install_requires=[
         "openai>=0.27.6",
+        "pydantic>=1.10.7",
     ],
 )
