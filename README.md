@@ -9,6 +9,12 @@ a comprehensive methodology for promoting positive intentions in AI systems worl
 As this is an ongoing effort, the GATO Toolkit will evolve along with the research.
 In this current iteration, the focus is on dataset generation and model alignment.
 
+## Installation
+
+```shell
+pip install gato-toolkit
+```
+
 ## Capabilities
 
 ### Come up with new scenarios to test
